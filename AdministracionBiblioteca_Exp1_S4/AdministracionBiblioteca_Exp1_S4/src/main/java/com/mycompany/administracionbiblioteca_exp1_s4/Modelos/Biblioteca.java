@@ -47,6 +47,10 @@ public class Biblioteca {
         libro.prestar();
     }
 
+    public ArrayList<Libro> getLibros() {
+        return libros;
+    }
+
     public Biblioteca(ArrayList<Libro> libros, HashMap<String, Usuario> usuarios) {
         this.libros = libros;
         this.usuarios = usuarios;
