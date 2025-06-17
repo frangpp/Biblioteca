@@ -8,34 +8,29 @@ package com.mycompany.administracionbiblioteca_exp1_s4.CSV;
  *
  * @author crist
  */
-import com.mycompany.administracionbiblioteca_exp1_s4.Modelos.Biblioteca;
+
 import com.mycompany.administracionbiblioteca_exp1_s4.Modelos.Libro;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.StringTokenizer;
+import java.util.HashMap;
+
 
 public class ArchivoLibros {
-    public static void cargarLibros(String rutaArchivo, Biblioteca biblioteca) throws IOException {
+    public static HashMap<String, Libro> cargarLibros(String rutaArchivo) throws IOException {
+        HashMap<String, Libro> libros = new HashMap<>();
         BufferedReader br = new BufferedReader(new FileReader(rutaArchivo));
         String linea;
+        br.readLine(); // Saltar la cabecera
         while ((linea = br.readLine()) != null) {
             String[] partes = linea.split(",");
-            if (partes.length == 2) {
-                biblioteca.agregarLibro(new Libro(partes[0], partes[1]));
+            if (partes.length == 4) {
+                String titulo = partes[0].trim();
+                String autor = partes[1].trim();
+                int fecha = Integer.parseInt(partes[2].trim());
+                String genero = partes[3].trim();
+                libros.put(titulo, new Libro(titulo, autor, fecha, genero));
             }
         }
         br.close();
-    }
-
-    public ArchivoLibros() {
-    }
-
-   
-    public static void guardarLibros(String rutaArchivo, ArrayList<Libro> libros) throws IOException {
-        FileWriter fw = new FileWriter(rutaArchivo);
-        for (Libro libro : libros) {
-            fw.write(libro.getTitulo() + "," + libro.getAutor() + "\n");
-        }
-        fw.close();
+        return libros;
     }
 }

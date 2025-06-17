@@ -41,10 +41,10 @@ public class Biblioteca {
 
     public void prestarLibro(String titulo) throws LibroNoEncontradoException, LibroYaPrestadoException {
         Libro libro = buscarLibro(titulo);
-        if (libro.estaPrestado()) {
+        if (libro.isTomado()) {
             throw new LibroYaPrestadoException("El libro '" + titulo + "' ya está prestado.");
         }
-        libro.prestar();
+        libro.tomado();
     }
 
     public ArrayList<Libro> getLibros() {
@@ -56,7 +56,6 @@ public class Biblioteca {
         this.usuarios = usuarios;
     }
 
-   
 
     public HashMap<String, Usuario> getUsuarios() {
         return usuarios;
@@ -70,6 +69,4 @@ public class Biblioteca {
         this.usuarios = usuarios;
     }
 
-   
-    
 }

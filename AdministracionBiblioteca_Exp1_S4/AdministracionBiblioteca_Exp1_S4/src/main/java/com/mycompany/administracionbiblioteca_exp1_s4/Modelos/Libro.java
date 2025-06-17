@@ -12,20 +12,52 @@ public class Libro {
     
     private String titulo;
     private String autor;
-    private boolean prestado;
+    private int fecha;
+    private String genero;
+    private boolean tomado;
 
-    public Libro(String titulo, String autor) {
+
+    public Libro(String titulo, String autor, int anio, String genero) {
         this.titulo = titulo;
         this.autor = autor;
-        this.prestado = false;
+        this.fecha = anio;
+        this.genero = genero;
     }
 
-    public String getTitulo() { return titulo; }
-    public String getAutor() { return autor; }
-    public boolean estaPrestado() { return prestado; }
+    public String getTitulo() {
+        return titulo;
+    }
 
-    public void prestar() { this.prestado = true; }
-    public void devolver() { this.prestado = false; }
+    public String getAutor() {
+        return autor;
+    }
+
+    public int getFecha() {
+        return fecha;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public boolean isTomado() {
+        return tomado;
+    }
+
+    public void tomado() {
+        this.tomado = true;
+    }
+
+    public void devolver() {
+        this.tomado = false;
+    }
+
+    @Override
+    public String toString() {
+        return "Titulo: " + titulo + ", Autor: " + autor + ", Año: " + fecha + ", Género: " + genero +
+               ", Tomado: " + (tomado ? "Sí" : "No");
+    }
+
 }
 
 
